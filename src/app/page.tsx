@@ -18,7 +18,7 @@ export default async function homePage() {
         <div>
             <>Home Page</>
             {weathers.map(item =>
-                <div>
+                <div key={item.summary}>
                     date = {item.date}
                     temperatureC = {item.temperatureC}
                     temperatureF = {item.temperatureF}
