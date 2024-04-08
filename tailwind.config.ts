@@ -15,6 +15,19 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: [
+      {
+        sweetTooth: {
+          "primary": "#e39898",
+          "secondary": "#f6c1c1",
+          "accent": "#f8d8d8",
+          "neutral": "#ae7b7b",
+          "base-100": "#7a5656",
+        }
+      }
+    ],
+  },
 };
 export default config;
