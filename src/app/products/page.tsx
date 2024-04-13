@@ -53,7 +53,7 @@ export default function productsPage() {
                         {
                             tempData.map(product => {
                                 if (product.type == ProductType.bundtCakes)
-                                    return (<ProductCard {...product} />)
+                                    return (<ProductCard {...product} key={product.id} />)
                             })
                         }
                     </div>
