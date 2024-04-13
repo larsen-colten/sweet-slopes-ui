@@ -2,10 +2,10 @@ import React, { useContext } from 'react'
 import Image from 'next/image'
 import TempImage from '../assets/image.png'
 import Product from '../types/Product'
-import { CartContext } from '../contexts';
+// import { CartContext } from '../contexts';
 
 export default function ProductCard(product: Product) {
-    let cart = useContext(CartContext);
+    // let cart = useContext(CartContext);
 
 
     function AddToCart(product: Product) {
