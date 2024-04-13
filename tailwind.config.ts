@@ -22,9 +22,9 @@ const config: Config = {
         sweetTooth: {
           "primary": "#e39898",
           "secondary": "#f6c1c1",
-          "accent": "#f8d8d8",
+          "accent": "#7a5656",
           "neutral": "#ae7b7b",
-          "base-100": "#7a5656",
+          "base-100": "#f8d8d8",
         }
       }
     ],

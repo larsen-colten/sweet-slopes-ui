@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { createContext, useState } from 'react'
+import Product from "../app/types/Product"
 
 interface Weather {
     date: Date,

@@ -1,18 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Image from 'next/image'
 import TempImage from '../assets/image.png'
+import Product from '../types/Product'
+import { CartContext } from '../contexts';
+
+export default function ProductCard(product: Product) {
+    let cart = useContext(CartContext);
 
 
+    function AddToCart(product: Product) {
 
-export default function ProductCard() {
+    }
+
     return (
-        <div className='card w-96 bg-base-100 shadow-xl'>
-            <figure><Image src={TempImage.src} width={96} height={96} alt="cake"/></figure>
+        <div className='card w-96 bg-neutral shadow-xl flex-none'>
+            <figure className="px-10 pt-10"><Image className="gap-10" src={TempImage.src} width={275} height={275} alt="cake" /></figure>
             <div className="card-body">
-                <h2 className="card-title">Shoes!</h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <h2 className="card-title">{product.name}</h2>
+                <h3 className="card-cost">{product.cost.toFixed(2)} $</h3>
+                <p>{product.description}</p>
                 <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Buy Now</button>
+                    <button className="btn btn-primary">Add to Cart</button>
                 </div>
             </div>
         </div >

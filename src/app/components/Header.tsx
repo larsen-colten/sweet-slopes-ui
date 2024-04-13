@@ -1,6 +1,8 @@
 
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import Logo from '../assets/logo.png'
 
 export default function Header() {
     return (
@@ -17,12 +19,13 @@ export default function Header() {
                         <li><Link href='/contact'>Contact</Link></li>
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+                <figure><Image src={Logo.src} width={50} height={50} alt="cake" /></figure>
+                <a className="btn btn-ghost text-xl">Sweet Slopes Bakery</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     <li><Link href='/'>Home</Link></li>
-                    <li><Link href='/contact'>Products</Link></li>
+                    <li><Link href='/products'>Products</Link></li>
                     <li><Link href='/faq'>FAQ</Link></li>
                     <li><Link href='/contact'>Contact</Link></li>
                 </ul>
