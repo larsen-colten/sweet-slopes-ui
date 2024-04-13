@@ -1,5 +1,3 @@
-'use client'
-
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -22,14 +20,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [cart, setCart] = useState<Product[]>([]);
+  // const [cart, setCart] = useState<Product[]>([]);
 
   return (
     <html lang="en" data-theme="sweetTooth">
-      <CartContext.Provider value={cart}>
+      {/* <CartContext.Provider value={cart}> */}
         <Header />
         {children}
-      </CartContext.Provider>
+      {/* </CartContext.Provider> */}
     </html>
   );
 }
