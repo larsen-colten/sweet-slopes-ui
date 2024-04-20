@@ -13,8 +13,8 @@ export default function ProductCard(product: Product) {
     }
 
     return (
-        <div className='card w-96 bg-neutral shadow-xl flex-none'>
-            <figure className="px-10 pt-10"><Image className="gap-10" src={TempImage.src} width={275} height={275} alt="cake" /></figure>
+        <div className='card w-950 bg-neutral shadow-xl flex-none'>
+            <figure className="px-10 pt-10"><Image className="gap-10" src={TempImage.src} width={200} height={200} alt="cake" /></figure>
             <div className="card-body">
                 <h2 className="card-title">{product.name}</h2>
                 <h3 className="card-cost">{product.cost.toFixed(2)} $</h3>

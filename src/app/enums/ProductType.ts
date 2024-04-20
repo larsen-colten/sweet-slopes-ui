@@ -1,3 +1,4 @@
 export enum ProductType {
-    bundtCakes = 1,
+    BundtCakes = 1,
+    Other = 2
 }

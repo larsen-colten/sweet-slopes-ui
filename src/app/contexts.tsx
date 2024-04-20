@@ -1,3 +1,6 @@
-import { createContext } from "vm";
+import { createContext } from "react";
+import Product from "./types/Product";
 
-export const CartContext = createContext();
+
+var cart: Product[] = [];
+export const CartContext = createContext(cart);

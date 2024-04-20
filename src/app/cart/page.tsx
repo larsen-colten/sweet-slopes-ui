@@ -1,8 +1,8 @@
 import React from 'react'
 import Title from '../components/Title'
 
-export default function ContactPage() {
+export default function CartPage() {
     return (
-        <Title title={"Contact"} />
+        <Title title={"Cart"} />
     )
 }
