@@ -10,7 +10,6 @@ export default async function homePage() {
 
     return (
         <div>
-
             <Title title={"Home-made Bundt Cakes"} />
 
             <div className="grid grid-cols-10">
@@ -21,7 +20,6 @@ export default async function homePage() {
 
                 </div>
             </div>
-
         </div>
     )
 }
