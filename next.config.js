@@ -8,4 +8,7 @@ module.exports = {
         },
       ]
     },
+    images: {
+      domains: ['items-images-production.s3.us-west-2.amazonaws.com'],
+    }
   }

@@ -4,10 +4,6 @@ import Link from 'next/link';
 import Title from './components/Title';
 
 export default async function homePage() {
-    const response = await fetch('https://sweet-slopes-api-05938f919785.herokuapp.com/WeatherForecast',
-        { next: { revalidate: 10 } } // refresh cache every 10 seconds or use (cache: 'no-store')
-    );
-
     return (
         <div>
             <Title title={"Home-made Bundt Cakes"} />

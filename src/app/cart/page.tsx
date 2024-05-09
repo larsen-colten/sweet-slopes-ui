@@ -2,11 +2,12 @@
 
 import React, { useState } from 'react'
 import Title from '../components/Title'
-import { PaymentForm, GooglePay, CreditCard, ApplePay } from 'react-square-web-payments-sdk'
+// import { PaymentForm, GooglePay, CreditCard, ApplePay } from 'react-square-web-payments-sdk'
 
 export default function CartPage() {
     const [pickup, setPickup] = useState(false);
     const [firstTab, setFirstTab] = useState(true);
+    // const applicationId = process.env.REACT_APP_SQUARE_APPICATION_ID
 
     // const cardTokenizeResponseReceived = { async(token, verifiedBuyer) => {
     //     const response = await fetch("/api/pay", {
@@ -100,17 +101,17 @@ export default function CartPage() {
 
                     {/* TODO add square stuff */}
                     {/* <PaymentForm
-                            applicationId="sandbox-XXXXXX"
-                            carTokenizeResponseReceived={(token, verifiedBuyer) => {
-                                console.log('token:', token);
-                                console.log('verifiedBuyer:', verifiedBuyer);
-                            }}
-                            locationId='XXXXXXXXXX'>
-                            <GooglePay />
-                            <ApplePay />
-                            <CreditCard />
+                        applicationId={applicationId}
+                        carTokenizeResponseReceived={(token: string, verifiedBuyer) => {
+                            console.log('token:', token);
+                            console.log('verifiedBuyer:', verifiedBuyer);
+                        }}
+                        locationId='XXXXXXXXXX'>
+                        <GooglePay />
+                        <ApplePay />
+                        <CreditCard />
 
-                        </PaymentForm> */}
+                    </PaymentForm> */}
 
 
                 </div>
