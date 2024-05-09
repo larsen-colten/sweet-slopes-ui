@@ -22,11 +22,6 @@ export default function ProductCard(props: ProductCardProps) {
         setDescription(props.product.itemData?.description || '');
     }, []);
 
-
-    function AddToCart(product: CatalogObject) {
-
-    }
-
     return (
         <div className='card w-950 bg-neutral shadow-xl flex-none'>
             <figure className="px-10 pt-10"><Image className="gap-10" src={props.imageURL} width={200} height={200} alt="cake" /></figure>
