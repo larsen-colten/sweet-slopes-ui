@@ -2,26 +2,16 @@
 
 import React, { useState } from 'react'
 import Title from '../components/Title'
-// import { PaymentForm, GooglePay, CreditCard, ApplePay } from 'react-square-web-payments-sdk'
+import { CreditCard, PaymentForm } from "react-square-web-payments-sdk";
+import { submitPayment } from '../actions/actions';
+import { CreatePaymentRequest } from 'square';
+import { randomUUID } from 'crypto';
 
 export default function CartPage() {
     const [pickup, setPickup] = useState(false);
     const [firstTab, setFirstTab] = useState(true);
-    // const applicationId = process.env.REACT_APP_SQUARE_APPICATION_ID
 
-    // const cardTokenizeResponseReceived = { async(token, verifiedBuyer) => {
-    //     const response = await fetch("/api/pay", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-type": "application/json",
-    //         },
-    //         body: JSON.stringify({
-    //             sourceId: token.token,
-    //         }),
-    //     });
-    //     console.log(await response.json());
-    // }
-    // }
+
 
     return (
         <>
@@ -93,25 +83,27 @@ export default function CartPage() {
 
                 </div>
 
-
                 {/* Review cart */}
                 <input type="radio" name="my_tabs_2" role="tab" className="tab" aria-label="Payment" checked={!firstTab} onClick={() => setFirstTab(false)} />
                 <div role="tabpanel" className="tab-content bg-base-100 border-base-300 rounded-box p-6 h-screen">Payment
 
-
-                    {/* TODO add square stuff */}
-                    {/* <PaymentForm
-                        applicationId={applicationId}
-                        carTokenizeResponseReceived={(token: string, verifiedBuyer) => {
-                            console.log('token:', token);
-                            console.log('verifiedBuyer:', verifiedBuyer);
+                    <PaymentForm
+                        applicationId={"sandbox-sq0idb-GaJ-_gQkxXfZwSkmvRtXeA"}
+                        locationId={"LW5B9GHEVEP3X"}
+                        cardTokenizeResponseReceived={async (token: any) => {
+                            var createPaymentRequest: CreatePaymentRequest = {
+                                sourceId: token,
+                                idempotencyKey: randomUUID(),
+                                amountMoney: {
+                                    amount: BigInt(100),
+                                    currency: "USD"
+                                }
+                            };
+                            const result = await submitPayment(createPaymentRequest);
                         }}
-                        locationId='XXXXXXXXXX'>
-                        <GooglePay />
-                        <ApplePay />
+                    >
                         <CreditCard />
-
-                    </PaymentForm> */}
+                    </PaymentForm>
 
 
                 </div>
