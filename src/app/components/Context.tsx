@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 import { CartContext } from "../contexts";
-import Product from "../types/Product";
+import { CatalogObject } from "square";
 
 export default function Context({
     children
 }: {
     children: React.ReactNode
 }) {
-    const [cart, setCart] = useState<Product[]>([]);
+    const [cart, setCart] = useState<CatalogObject[]>([]);
 
     return (
         <CartContext.Provider value={cart} >
