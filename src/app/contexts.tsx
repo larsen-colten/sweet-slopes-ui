@@ -1,6 +1,6 @@
 import { createContext } from "react";
-import Product from "./types/Product";
+import { CatalogObject } from "square";
 
 
-var cart: Product[] = [];
+var cart: CatalogObject[] = [];
 export const CartContext = createContext(cart);

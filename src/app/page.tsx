@@ -1,5 +1,4 @@
 import React, { createContext, useState } from 'react'
-import Product from "../app/types/Product"
 import Link from 'next/link';
 import Title from './components/Title';
 
