@@ -5,6 +5,7 @@ import ProductCard from '../components/ProductCard'
 import { CartContext } from '../contexts'
 import Title from '../components/Title'
 import { CatalogObject } from 'square'
+import { getCatalogObjects } from '../actions/actions'
 
 interface Catagory {
     name: string;
@@ -27,12 +28,7 @@ export default function ProductsPage() {
     }, [catalogObjects]);
 
     async function getProducts() {
-        const response = await fetch('https://sweet-slopes-api-0fac88cb7d8b.herokuapp.com/Commerce/GetListCatalog',
-            { next: { revalidate: 10 } } // refresh cache every 10 seconds or use (cache: 'no-store')
-        );
-        const data = await response.json();
-        console.log(data);
-        setCatalogObjects(data);
+        setCatalogObjects(await getCatalogObjects());
     }
 
     async function populateStates() {
@@ -58,7 +54,7 @@ export default function ProductsPage() {
     return (
         <>
             {catagories.map(category => (
-                <>
+                <React.Fragment key={category.id}>
                     <Title title={category.name} />
 
                     <div className="grid grid-cols-10 py-20">
@@ -69,14 +65,13 @@ export default function ProductsPage() {
                                         const image = images.find(image => {
                                             return product.itemData?.imageIds && product.itemData?.imageIds.includes(image.id)
                                         });
-                                        console.log(image?.imageData?.url || '')
                                         return (<ProductCard product={product} imageURL={image?.imageData?.url || ''} {...product} key={product.id} />)
                                     }
                                 })}
                             </div>
                         </div>
                     </div>
-                </>
+                </React.Fragment>
             ))}
         </>
     )

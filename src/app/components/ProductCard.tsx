@@ -10,11 +10,9 @@ interface ProductCardProps {
 }
 
 export default function ProductCard(props: ProductCardProps) {
-    // let cart = useContext(CartContext);
     const [name, setName] = React.useState<string>('');
     const [price, setPrice] = React.useState<number>(0);
     const [description, setDescription] = React.useState<string>('');
-    console.log(props.imageURL)
 
     useEffect(() => {
         setName(props.product.itemData?.name || '');

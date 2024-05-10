@@ -11,11 +11,29 @@ const { paymentsApi } = new Client({
 export async function submitPayment(createPaymentRequest: CreatePaymentRequest) {
     try {
         const { result } = await paymentsApi.createPayment({
-            idempotencyKey: createPaymentRequest.idempotencyKey || randomUUID(),
-            sourceId: createPaymentRequest.sourceId,
-            amountMoney: createPaymentRequest.amountMoney,
+            idempotencyKey: randomUUID(),
+            sourceId: createPaymentRequest.sourceId.token,
+            amountMoney: {
+                amount: createPaymentRequest.amountMoney?.amount,
+                currency: "USD",
+            },
         });
         return result;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getCatalogObjects() {
+    try {
+        const response = await fetch(`${process.env.REACT_APP_BASEURL}/Commerce/GetListCatalog`,
+            { next: { revalidate: 10 } } // refresh cache every 10 seconds or use (cache: 'no-store')
+        );
+        if (!response.ok) {
+            // This will activate the closest `error.js` Error Boundary
+            throw new Error('Failed to fetch data')
+        }
+        return response.json();
     } catch (error) {
         console.log(error);
     }

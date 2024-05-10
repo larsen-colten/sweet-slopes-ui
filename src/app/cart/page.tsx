@@ -11,8 +11,6 @@ export default function CartPage() {
     const [pickup, setPickup] = useState(false);
     const [firstTab, setFirstTab] = useState(true);
 
-
-
     return (
         <>
             <Title title={"Cart"} />
@@ -93,7 +91,7 @@ export default function CartPage() {
                         cardTokenizeResponseReceived={async (token: any) => {
                             var createPaymentRequest: CreatePaymentRequest = {
                                 sourceId: token,
-                                idempotencyKey: randomUUID(),
+                                idempotencyKey: '',
                                 amountMoney: {
                                     amount: BigInt(100),
                                     currency: "USD"
