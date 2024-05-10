@@ -12,7 +12,7 @@ export async function submitPayment(createPaymentRequest: CreatePaymentRequest) 
     try {
         const { result } = await paymentsApi.createPayment({
             idempotencyKey: randomUUID(),
-            sourceId: createPaymentRequest.sourceId.token,
+            sourceId: createPaymentRequest.sourceId,
             amountMoney: {
                 amount: createPaymentRequest.amountMoney?.amount,
                 currency: "USD",

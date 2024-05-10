@@ -90,7 +90,7 @@ export default function CartPage() {
                         locationId={"LW5B9GHEVEP3X"}
                         cardTokenizeResponseReceived={async (token: any) => {
                             var createPaymentRequest: CreatePaymentRequest = {
-                                sourceId: token,
+                                sourceId: token.token,
                                 idempotencyKey: '',
                                 amountMoney: {
                                     amount: BigInt(100),
