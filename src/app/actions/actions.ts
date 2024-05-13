@@ -1,6 +1,6 @@
 "use server";
 
-import { Client, CreatePaymentRequest, Environment } from "square";
+import { Client, CreateOrderRequest, CreatePaymentRequest, Environment, Order, PayOrderRequest } from "square";
 import { randomUUID } from "crypto";
 
 const { paymentsApi } = new Client({
@@ -32,6 +32,42 @@ export async function getCatalogObjects() {
         if (!response.ok) {
             // This will activate the closest `error.js` Error Boundary
             throw new Error('Failed to fetch data')
+        }
+        return response.json();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function createOrder(createOrderRequest: CreateOrderRequest) {
+    try {
+        const response = await fetch(`${process.env.REACT_APP_BASEURL}/Commerce/CreateOrder`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(createOrderRequest)
+        });
+        if (!response.ok) {
+            throw new Error('Failed to create order')
+        }
+        return response.json();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function payOrder(orderId: string, payOrderRequest: PayOrderRequest) {
+    try {
+        const response = await fetch(`${process.env.REACT_APP_BASEURL}/Commerce/PayOrder/${orderId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payOrderRequest)
+        });
+        if (!response.ok) {
+            throw new Error('Failed to pay order')
         }
         return response.json();
     } catch (error) {

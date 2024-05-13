@@ -1,8 +1,10 @@
-import React, { createContext, useState } from 'react'
 import Link from 'next/link';
 import Title from './components/Title';
+import { useContext } from 'react';
+import { CartContext } from './CartContext';
+import { Order, OrderLineItem } from 'square';
 
-export default async function homePage() {
+export default function HomePage() {
     return (
         <div>
             <Title title={"Home-made Bundt Cakes"} />

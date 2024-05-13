@@ -1,21 +1,21 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
-import Context from "./components/Context";
+import { Metadata } from "next";
+import { CartContext, CartProvider } from "./CartContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// export const metadata: Metadata = {
-//   title: "Sweet Slopes Bakery",
-//   description: "Sweet Slopes Bakery",
-// };
+export const metadata: Metadata = {
+  title: "Sweet Slopes Bakery",
+  description: "Sweet Slopes Bakery",
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
 
   return (
     <html lang="en" data-theme="sweetTooth">
@@ -25,9 +25,9 @@ export default function RootLayout({
           <Header />
 
           <main className="mb-auto">
-            <Context>
+            <CartProvider>
               {children}
-            </Context>
+            </CartProvider>
           </main>
 
           <footer className="footer p-5 bg-neutral text-neutral-content" >

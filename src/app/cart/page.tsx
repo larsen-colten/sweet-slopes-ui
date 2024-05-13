@@ -1,28 +1,78 @@
 'use client';
 
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Title from '../components/Title'
 import { CreditCard, PaymentForm } from "react-square-web-payments-sdk";
-import { submitPayment } from '../actions/actions';
-import { CreatePaymentRequest } from 'square';
+import { createOrder, payOrder, submitPayment } from '../actions/actions';
+import { CreatePaymentRequest, PayOrderRequest } from 'square';
 import { randomUUID } from 'crypto';
+import { CartContext } from '../CartContext';
+
+enum Pages {
+    BasicInfo,
+    Review
+}
 
 export default function CartPage() {
     const [pickup, setPickup] = useState(false);
     const [firstTab, setFirstTab] = useState(true);
+    const { order } = useContext(CartContext);
+    const [page, setPage] = useState(Pages.BasicInfo);
+
+    async function pay(token: any) {
+        var createPaymentRequest: CreatePaymentRequest = {
+            sourceId: token.token,
+            idempotencyKey: "",
+            amountMoney: {
+                amount: BigInt(100),
+                currency: "USD"
+            }
+        };
+        const resultSubmitPayment = await submitPayment(createPaymentRequest);
+        console.log(resultSubmitPayment);
+
+        if (resultSubmitPayment) {
+            var createOrderRequest = {
+                order: order,
+                idempotencyKey: "",
+            }
+            const resultCreateOrder = await createOrder(createOrderRequest);
+            console.log(resultCreateOrder);
+
+            if (resultCreateOrder) {
+                var payOrderRequest: PayOrderRequest = {
+                    idempotencyKey: "",
+                    paymentIds: [resultSubmitPayment.payment?.id || '']
+                }
+
+                const resultPayOrder = await payOrder(resultCreateOrder.id, payOrderRequest);
+                if (resultPayOrder) {
+                    console.log(resultPayOrder);
+                    console.log('Payment successful');
+                }
+            }
+
+        }
+    }
 
     return (
         <>
             <Title title={"Cart"} />
 
+            {order.lineItems?.map((item, index) => {
+                return (
+                    <div key={index} className="card bg-base-100 shadow-xl w-950">
+                        <div className="card-body">
+                            <h2 className="card-title">{item.name}</h2>
+                            <p>{item.quantity}</p>
+                        </div>
+                    </div>
+                )
+            })}
 
-            {/* Tabs */}
-            <div role="tablist" className="tabs tabs-lifted ">
-
-                {/* Basic information */}
-                <input type="radio" name="my_tabs_2" role="tab" className="tab w-80" aria-label="Order info" checked={firstTab} onClick={() => setFirstTab(true)} />
-                <div role="tabpanel" className="tab-content bg-base-100 border-base-300 rounded-box p-6 h-screen">Order info
-
+            {/* Basic information */}
+            {page == Pages.BasicInfo &&
+                <>
                     <div className="label">
                         <span className="label-text">Email</span>
                     </div>
@@ -78,37 +128,24 @@ export default function CartPage() {
                         </>
                     }
 
+                    <button className="btn btn-primary" onClick={() => setPage(Pages.Review)}>Review</button>
+                </>
+            }
 
-                </div>
-
-                {/* Review cart */}
-                <input type="radio" name="my_tabs_2" role="tab" className="tab" aria-label="Payment" checked={!firstTab} onClick={() => setFirstTab(false)} />
-                <div role="tabpanel" className="tab-content bg-base-100 border-base-300 rounded-box p-6 h-screen">Payment
-
+            {/* Review cart */}
+            {page == Pages.Review &&
+                <>
                     <PaymentForm
                         applicationId={"sandbox-sq0idb-GaJ-_gQkxXfZwSkmvRtXeA"}
-                        locationId={"LW5B9GHEVEP3X"}
+                        locationId={"L18ARQTAE5CE2"}
                         cardTokenizeResponseReceived={async (token: any) => {
-                            var createPaymentRequest: CreatePaymentRequest = {
-                                sourceId: token.token,
-                                idempotencyKey: '',
-                                amountMoney: {
-                                    amount: BigInt(100),
-                                    currency: "USD"
-                                }
-                            };
-                            const result = await submitPayment(createPaymentRequest);
+                            pay(token);
                         }}
                     >
                         <CreditCard />
                     </PaymentForm>
-
-
-                </div>
-
-            </div>
-
-
+                </>
+            }
         </>
     )
 }

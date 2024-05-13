@@ -1,10 +1,9 @@
 'use client'
 
-import React, { use, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ProductCard from '../components/ProductCard'
-import { CartContext } from '../contexts'
 import Title from '../components/Title'
-import { CatalogObject } from 'square'
+import { CatalogObject, OrderLineItem } from 'square'
 import { getCatalogObjects } from '../actions/actions'
 
 interface Catagory {
@@ -17,7 +16,6 @@ export default function ProductsPage() {
     const [catagories, setCatagories] = useState<Catagory[]>([]);
     const [products, setProducts] = useState<CatalogObject[]>([]);
     const [images, setImages] = useState<CatalogObject[]>([]);
-
 
     useEffect(() => {
         getProducts();
