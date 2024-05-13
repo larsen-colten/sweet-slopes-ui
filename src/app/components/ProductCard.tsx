@@ -51,7 +51,7 @@ export default function ProductCard(props: ProductCardProps) {
         <div className='card w-950 bg-neutral shadow-xl flex-none max-w-[20rem]'>
             <figure className="px-10 pt-10"><Image className="gap-10" src={props.imageURL} width={200} height={200} alt="cake" /></figure>
             <div className="card-body">
-                <h2 className="card-title">{truncate(name, 25)}</h2>
+                <h2 className="text-2xl">{truncate(name, 25)}</h2>
                 <h3 className="card-cost">{price.toFixed(2)} $</h3>
                 <p>{description}</p>
                 <div className="card-actions justify-end">

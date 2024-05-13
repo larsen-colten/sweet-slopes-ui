@@ -1,21 +1,23 @@
 'use client'
 
-import React, { useContext, useEffect, useState } from 'react'
-import ProductCard from '../components/ProductCard'
-import Title from '../components/Title'
-import { CatalogObject, OrderLineItem } from 'square'
-import { getCatalogObjects } from '../actions/actions'
+import React, { useContext, useEffect, useState } from 'react';
+import ProductCard from '../components/ProductCard';
+import Title from '../components/Title';
+import { CatalogObject, OrderLineItem } from 'square';
+import { getCatalogObjects } from '../actions/actions';
+import { BallTriangle } from 'react-loader-spinner';
 
 interface Catagory {
     name: string;
     id: string;
 }
 
-export default function ProductsPage() {
+export default function MenuPage() {
     const [catalogObjects, setCatalogObjects] = useState<CatalogObject[]>([]);
     const [catagories, setCatagories] = useState<Catagory[]>([]);
     const [products, setProducts] = useState<CatalogObject[]>([]);
     const [images, setImages] = useState<CatalogObject[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         getProducts();
@@ -27,6 +29,7 @@ export default function ProductsPage() {
 
     async function getProducts() {
         setCatalogObjects(await getCatalogObjects());
+        setLoading(false);
     }
 
     async function populateStates() {
@@ -51,6 +54,22 @@ export default function ProductsPage() {
 
     return (
         <>
+            {/* Spinner */}
+            {loading ?
+                <div className="loader-container">
+                    <BallTriangle
+                        height={100}
+                        width={100}
+                        radius={5}
+                        color="#e39898"
+                        ariaLabel="ball-triangle-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                    />
+                </div>
+                : null}
+
             {catagories.map(category => (
                 <React.Fragment key={category.id}>
                     <Title title={category.name} />

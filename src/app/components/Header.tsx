@@ -5,6 +5,9 @@ import Link from 'next/link'
 import React, { use, useContext, useEffect, useState } from 'react'
 import Logo from '../assets/logo.png'
 import { CartContext } from '../CartContext'
+import localFont from 'next/font/local'
+
+const apricot = localFont({ src: '../fonts/Apricots.ttf' });
 
 export default function Header() {
     const { order } = useContext(CartContext);
@@ -26,19 +29,17 @@ export default function Header() {
                         </div>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                             <li><Link href='/'>Home</Link></li>
-                            <li><Link href='/contact'>Products</Link></li>
-                            <li><Link href='/faq'>FAQ</Link></li>
+                            <li><Link href='/menu'>Menu</Link></li>
                             <li><Link href='/contact'>Contact</Link></li>
                         </ul>
                     </div>
                     <figure><Image src={Logo.src} width={100} height={100} alt="cake" /></figure>
-                    <a className="btn btn-ghost text-2xl">Sweet Slopes Bakery</a>
+                    <a className={`btn btn-ghost text-4xl ${apricot.className}`}>Sweet Slopes Bakery</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
                         <li className="text-lg"><Link href='/'>Home</Link></li>
-                        <li className="text-lg"><Link href='/products'>Products</Link></li>
-                        <li className="text-lg"><Link href='/faq'>FAQ</Link></li>
+                        <li className="text-lg"><Link href='/menu'>Menu</Link></li>
                         <li className="text-lg"><Link href='/contact'>Contact</Link></li>
                     </ul>
                 </div>
