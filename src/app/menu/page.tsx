@@ -6,6 +6,7 @@ import Title from '../components/Title';
 import { CatalogObject, OrderLineItem } from 'square';
 import { getCatalogObjects } from '../actions/actions';
 import { BallTriangle } from 'react-loader-spinner';
+import ToggleButton from '../components/ToggleButton';
 
 interface Catagory {
     name: string;
@@ -69,6 +70,11 @@ export default function MenuPage() {
                     />
                 </div>
                 : null}
+
+
+            <div className="absolute right-0 px-4">
+                <ToggleButton />
+            </div>
 
             {catagories.map(category => (
                 <React.Fragment key={category.id}>

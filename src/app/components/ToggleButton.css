@@ -1,0 +1,27 @@
+.toggle-button {
+    display: flex;
+    border: 1px solid #e39898; /* green-500 */
+    width: 250px;
+    justify-content: space-between;
+}
+
+.toggle-option {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    background: #F9FAFB; /* gray-50 */
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.toggle-option.active {
+    background: #e39898; /* green-500 */
+    color: #F9FAFB; /* gray-50 */
+}
+
+/* "primary": "#e39898",
+"secondary": "#f6c1c1",
+"accent": "#7a5656",
+"neutral": "#ae7b7b",
+"base-100": "#f8d8d8", */
