@@ -1,5 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './ToggleButton.css';
+import { getCalandarCount } from '../actions/actions';
 
 // Define the input style outside of the render method
 const inputStyle = {
@@ -13,7 +14,6 @@ const inputStyle = {
 };
 
 const ToggleButton = () => {
-    const today = new Date().toISOString().split('T')[0];
     const [isDelivery, setIsDelivery] = useState(true);
 
     const [address1, setAddress1] = useState('');
@@ -25,7 +25,29 @@ const ToggleButton = () => {
     const [date, setDate] = useState(new Date());
     const [time, setTime] = useState('');
 
+    const [maxError, setMaxError] = useState(false);
+
     const modalRef = useRef<HTMLDialogElement>(null);
+
+    const maxDays = 3;
+
+
+
+    useEffect(() => {
+        const fetchCalendarCount = async () => {
+            const count = await getCalandarCount(date);
+            if (count >= maxDays) {
+                setMaxError(true);
+            } else {
+                setMaxError(false);
+            }
+            console.log(count);
+        };
+
+        fetchCalendarCount();
+    }, [date]);
+
+
 
     function createDateTimeString(date: Date, time: string): string {
         return date.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit' }) + ' ' + time;
@@ -87,6 +109,9 @@ const ToggleButton = () => {
                             }}
                             className='mb-3 '
                         />
+
+                        {maxError && <div className="error-message text-red-500">The selected day is full. Please choose another day.</div>}
+
                         <h2 className='p-1'>Delivery Time</h2>
                         <select
                             value={time}
@@ -191,7 +216,7 @@ const ToggleButton = () => {
                         <button
                             className="btn btn-primary mt-5 "
                             onClick={closeModal}
-                            disabled={isDelivery && (!address1 || !city || !state || !zip)}
+                            disabled={maxError || isDelivery && (!address1 || !city || !state || !zip)}
                         >
                             Update
                         </button>

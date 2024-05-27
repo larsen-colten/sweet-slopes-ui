@@ -74,3 +74,24 @@ export async function payOrder(orderId: string, payOrderRequest: PayOrderRequest
         console.log(error);
     }
 }
+
+export async function getCalandarCount(date: Date) {
+    try {
+        const response = await fetch(`${process.env.REACT_APP_BASEURL}/api/GoogleCalendar/calendars/${process.env.REACT_APP_CALANDAR_ID}/events/count?date=${date.toISOString()}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            throw new Error('Failed to get calandar count')
+        }
+        return response.json();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function addCalandarEvent() {
+
+}

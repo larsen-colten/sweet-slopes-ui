@@ -1,8 +1,5 @@
 import Link from 'next/link';
 import Title from './components/Title';
-import { useContext } from 'react';
-import { CartContext } from './CartContext';
-import { Order, OrderLineItem } from 'square';
 
 export default function HomePage() {
     return (

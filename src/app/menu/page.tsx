@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
 import Title from '../components/Title';
 import { CatalogObject, OrderLineItem } from 'square';
-import { getCatalogObjects } from '../actions/actions';
+import { getCalandarCount, getCatalogObjects } from '../actions/actions';
 import { BallTriangle } from 'react-loader-spinner';
 import ToggleButton from '../components/ToggleButton';
 
